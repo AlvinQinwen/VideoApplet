@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 /**
  * App\Models\Advertising
@@ -26,13 +27,21 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Advertising whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Advertising extends Model
+class Advertising extends BaseModel
 {
     protected $fillable = ['id', 'title', 'cover_url', 'jump_url', 'sort', 'created_at'];
 
-    protected $casts = ['created_at' => 'custom_datetime'];
-
     protected $hidden = ['updated_at'];
+
+    //单利调用
+    private static $_instance;
+    public static function getInstance()
+    {
+        if (self::$_instance === NULL) {
+            self::$_instance = new self();
+        }
+        return self::$_instance;
+    }
 
     public function searchCon(array $validated, $page, $page_size)
     {
@@ -67,5 +76,15 @@ class Advertising extends Model
          $data['per_page'] = $page_size;
 
          return $data;
+    }
+
+    /**
+     * @description 通过ids获取广告信息
+     * @param $ids
+     * @return Collection
+     */
+    public function getInfo($ids)
+    {
+        return self::whereIn('id', $ids)->select(['id', 'title', 'cover_url', 'jump_url', 'sort'])->get();
     }
 }

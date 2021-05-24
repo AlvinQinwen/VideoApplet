@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AdvertisingController;
+use App\Http\Controllers\VideoController;
+use App\Http\Controllers\AppletController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,5 +36,18 @@ Route::group(['prefix' => 'advertising'], function () {
  * 视频模块
  */
 Route::group(['prefix' => 'video'], function () {
+    Route::post('index/{page?}/{page_size?}', [VideoController::class, 'index'])->name('视频列表');
+    Route::post('create', [VideoController::class, 'create'])->name('新增视频');
+    Route::get('edit/{id}', [VideoController::class, 'edit'])->name('视频修改');
+    Route::get('destroy/{id}', [VideoController::class, 'destroy'])->name('视频删除');
+});
 
+/**
+ * 小程序模块
+ */
+Route::group(['prefix' => 'app'], function () {
+    Route::post('index/{page?}/{page_size?}', [AppletController::class, 'index'])->name('小程序列表');
+    Route::post('create', [AppletController::class, 'create'])->name('新增小程序');
+    Route::get('edit/{id}', [AppletController::class, 'edit'])->name('小程序修改');
+    Route::get('destroy/{id}', [AppletController::class, 'destroy'])->name('小程序删除');
 });
