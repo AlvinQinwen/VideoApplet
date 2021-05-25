@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\RedisCacheDataEvent;
 use App\Models\Video;
 use Illuminate\Http\Request;
+use Predis\Client;
 
 class VideoController extends Controller
 {
@@ -13,6 +14,8 @@ class VideoController extends Controller
         $page = $request->page??0;
         $page_size = $request->page_size??10;
         $params = $request->input();
+        $redis = new Client();
+        $redis->set('total', $video->count());
 
         return response()->json([
             'code' => 200,
