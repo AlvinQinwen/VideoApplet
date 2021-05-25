@@ -35,7 +35,7 @@ class AppletController extends Controller
         $params = $request->input();
         $result = $applet->create($params)->toArray();
 
-        $this->redis->set('app-'.$result['app_id'], json_encode($result));
+        $this->redis->set($result['app_id'], json_encode($result));
 
         return response()->json([
             'code' => 201,
@@ -51,7 +51,7 @@ class AppletController extends Controller
         $data = $applet->find($id)->toArray();
         if ($data) {
 
-            $this->redis->set('app-'.$data['app_id'], json_encode($data));
+            $this->redis->set($data['app_id'], json_encode($data));
 
             return response()->json([
                 'code' => 201,
@@ -74,7 +74,7 @@ class AppletController extends Controller
         $data = $applet->find($request->id)->toArray();
         if ($data) {
 
-            $this->redis->del('app-'.$data['app_id']);
+            $this->redis->del($data['app_id']);
 
             return response()->json([
                 'code' => 204,
