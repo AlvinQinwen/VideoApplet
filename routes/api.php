@@ -2,10 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\AdvertisingController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\AppletController;
+use App\Http\Controllers\PathController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,4 +50,14 @@ Route::group(['prefix' => 'app'], function () {
     Route::post('create', [AppletController::class, 'create'])->name('新增小程序');
     Route::get('edit/{id}', [AppletController::class, 'edit'])->name('小程序修改');
     Route::get('destroy/{id}', [AppletController::class, 'destroy'])->name('小程序删除');
+});
+
+/**
+ * 路径
+ */
+Route::group(['prefix' => 'path'], function () {
+    Route::post('index/{page?}/{page_size?}', [PathController::class, 'index'])->name('小程序列表');
+    Route::post('create', [PathController::class, 'create'])->name('新增小程序');
+    Route::get('edit/{id}', [PathController::class, 'edit'])->name('小程序修改');
+    Route::get('destroy/{id}', [PathController::class, 'destroy'])->name('小程序删除');
 });

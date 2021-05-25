@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\PathCacheEvent;
 use App\Events\RedisCacheDataEvent;
+use App\Listeners\CachePathData;
 use App\Listeners\CacheVideoData;
 use App\Listeners\RedisCacheDataListener;
 use Illuminate\Auth\Events\Registered;
@@ -22,7 +24,10 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         //缓存视频
-        RedisCacheDataEvent::class => [CacheVideoData::class]
+        RedisCacheDataEvent::class => [CacheVideoData::class],
+
+        //缓存path
+        PathCacheEvent::class => [CachePathData::class]
     ];
 
     /**

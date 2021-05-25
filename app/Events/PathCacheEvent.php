@@ -10,14 +10,14 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class RedisCacheDataEvent
+class PathCacheEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public int $type;
     public array $data;
 
-    public function __construct(int $type, array $data = [])
+    public function __construct(int $type, array $data)
     {
         $this->type = $type;
         $this->data = $data;
@@ -30,6 +30,6 @@ class RedisCacheDataEvent
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('cache-video-data');
+        return new PrivateChannel('cache-path-data');
     }
 }

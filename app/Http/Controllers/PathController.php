@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\RedisCacheDataEvent;
-use App\Models\Video;
+use App\Events\PathCacheEvent;
+use App\Models\Path;
 use Illuminate\Http\Request;
 
-class VideoController extends Controller
+class PathController extends Controller
 {
-    public function index(Request $request, Video $video)
+    public function index(Request $request, Path $Path)
     {
         $page = $request->page??0;
         $page_size = $request->page_size??10;
@@ -17,15 +17,16 @@ class VideoController extends Controller
         return response()->json([
             'code' => 200,
             'message' => '查询成功',
-            'data' => $video->searchCon($params, $page, $page_size)
+            'data' => $Path->searchCon($params, $page, $page_size)
         ]);
 
     }
 
-    public function create(Request $request, Video $video)
+    public function create(Request $request, Path $Path)
     {
-        $result = $video->create($request->input());
-        event(new RedisCacheDataEvent(1, $result->toArray()));
+        $result = $Path->create($request->input());
+        event(new PathCacheEvent(1, $result->toArray()));
+
         return response()->json([
             'code' => 201,
             'message' => 'success',
@@ -33,17 +34,19 @@ class VideoController extends Controller
         ], 201);
     }
 
-    public function edit(Request $request, Video $video)
+    public function edit(Request $request, Path $Path)
     {
         $params = $request->input();
         $id = $request->id;
-        $data = $video->find($id)->toArray();
+        $data = $Path->find($id);
         if ($data) {
-            event(new RedisCacheDataEvent(3, $data));
+
+            event(new PathCacheEvent(1, $data->toArray()));
+
             return response()->json([
                 'code' => 201,
                 'message' => '更新数据成功',
-                'data' => $video->where('id', $id)->update($params)
+                'data' => $Path->where('id', $id)->update($params)
             ], 201);
         }
 
@@ -52,17 +55,20 @@ class VideoController extends Controller
             'message' => '该数据不存在',
             'data' => null
         ]);
+
     }
 
-    public function destroy(Request $request, Video $video)
+    public function destroy(Request $request, Path $Path)
     {
-        $data = $video->find($request->id)->toArray();
+        $data = $Path->find($request->id);
         if ($data) {
-            event(new RedisCacheDataEvent(2, $data));
+
+            event(new PathCacheEvent(2, $data->toArray()));
+
             return response()->json([
                 'code' => 204,
                 'message' => '删除数据成功',
-                'data' => $video->where('id', $request->id)->delete()
+                'data' => $Path->where('id', $request->id)->delete()
             ], 204);
         }
 

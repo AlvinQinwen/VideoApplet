@@ -29,6 +29,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Applet whereSecret($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applet whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read mixed $advertising_info
  */
 class Applet extends BaseModel
 {
