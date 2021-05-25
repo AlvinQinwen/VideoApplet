@@ -66,7 +66,7 @@ class VideoController extends Controller
                 'code' => 204,
                 'message' => '删除数据成功',
                 'data' => $video->where('id', $request->id)->delete()
-            ], 204);
+            ]);
         }
 
         return response()->json([

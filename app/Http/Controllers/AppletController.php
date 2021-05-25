@@ -48,6 +48,6 @@ class AppletController extends Controller
             'code' => 204,
             'message' => '删除数据成功',
             'data' => $applet->where('id', $request->id)->delete()
-        ], 204);
+        ]);
     }
 }

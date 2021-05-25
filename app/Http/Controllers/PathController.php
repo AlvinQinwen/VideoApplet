@@ -69,7 +69,7 @@ class PathController extends Controller
                 'code' => 204,
                 'message' => '删除数据成功',
                 'data' => $Path->where('id', $request->id)->delete()
-            ], 204);
+            ]);
         }
 
         return response()->json([
