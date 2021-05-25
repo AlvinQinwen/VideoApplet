@@ -28,7 +28,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'advertising'], function () {
     Route::post('index/{page?}/{page_size?}', [AdvertisingController::class, 'index'])->name('广告列表');
     Route::post('create', [AdvertisingController::class, 'create'])->name('新增广告');
-    Route::get('edit/{id}', [AdvertisingController::class, 'edit'])->name('广告修改');
+    Route::post('edit/{id}', [AdvertisingController::class, 'edit'])->name('广告修改');
     Route::get('destroy/{id}', [AdvertisingController::class, 'destroy'])->name('广告删除');
 });
 
@@ -38,7 +38,7 @@ Route::group(['prefix' => 'advertising'], function () {
 Route::group(['prefix' => 'video'], function () {
     Route::post('index/{page?}/{page_size?}', [VideoController::class, 'index'])->name('视频列表');
     Route::post('create', [VideoController::class, 'create'])->name('新增视频');
-    Route::get('edit/{id}', [VideoController::class, 'edit'])->name('视频修改');
+    Route::post('edit/{id}', [VideoController::class, 'edit'])->name('视频修改');
     Route::get('destroy/{id}', [VideoController::class, 'destroy'])->name('视频删除');
 });
 
@@ -48,7 +48,7 @@ Route::group(['prefix' => 'video'], function () {
 Route::group(['prefix' => 'app'], function () {
     Route::post('index/{page?}/{page_size?}', [AppletController::class, 'index'])->name('小程序列表');
     Route::post('create', [AppletController::class, 'create'])->name('新增小程序');
-    Route::get('edit/{id}', [AppletController::class, 'edit'])->name('小程序修改');
+    Route::post('edit/{id}', [AppletController::class, 'edit'])->name('小程序修改');
     Route::get('destroy/{id}', [AppletController::class, 'destroy'])->name('小程序删除');
 });
 
@@ -58,6 +58,6 @@ Route::group(['prefix' => 'app'], function () {
 Route::group(['prefix' => 'path'], function () {
     Route::post('index/{page?}/{page_size?}', [PathController::class, 'index'])->name('小程序列表');
     Route::post('create', [PathController::class, 'create'])->name('新增小程序');
-    Route::get('edit/{id}', [PathController::class, 'edit'])->name('小程序修改');
+    Route::post('edit/{id}', [PathController::class, 'edit'])->name('小程序修改');
     Route::get('destroy/{id}', [PathController::class, 'destroy'])->name('小程序删除');
 });
