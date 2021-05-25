@@ -29,9 +29,10 @@ class VideoController extends Controller
     {
         $result = $video->create($request->input());
         event(new RedisCacheDataEvent(1, $result->toArray()));
+
         return response()->json([
             'code' => 201,
-            'message' => 'success',
+            'message' => '新增视频成功',
             'data' => $result
         ], 201);
     }
