@@ -6,7 +6,6 @@ use App\Events\PathCacheEvent;
 use App\Events\RedisCacheDataEvent;
 use App\Listeners\CachePathData;
 use App\Listeners\CacheVideoData;
-use App\Listeners\RedisCacheDataListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
