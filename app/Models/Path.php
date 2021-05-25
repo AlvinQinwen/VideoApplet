@@ -30,6 +30,13 @@ class Path extends BaseModel
 
     protected $hidden = ['updated_at'];
 
+    protected $appends = ['app_name'];
+
+    public function getAppNameAttribute()
+    {
+        return Applet::where('app_id', $this->app_id)->select('name')->value('name');
+    }
+
 
     public function searchCon(array $validated, $page, $page_size)
     {
