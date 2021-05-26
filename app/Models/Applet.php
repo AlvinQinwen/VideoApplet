@@ -33,7 +33,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Applet extends BaseModel
 {
-    protected $fillable = ['id', 'name', 'app_id', 'secret', 'debug', 'advertising_ids', 'mark', 'created_at'];
+    protected $fillable = ['id', 'name', 'app_id', 'secret', 'debug', 'advertising_ids', 'mark',
+        'interstitia_unitId', 'screen_open', 'rewarded_unitId', 'excitation_open', 'created_at'
+    ];
 
     protected $hidden = ['updated_at', 'advertising_ids'];
 
