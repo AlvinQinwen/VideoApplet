@@ -29,7 +29,7 @@ use Illuminate\Support\Collection;
  */
 class Advertising extends BaseModel
 {
-    protected $fillable = ['id', 'title', 'cover_url', 'jump_url', 'sort', 'sort', 'created_at'];
+    protected $fillable = ['id', 'title', 'cover_url', 'jump_url', 'sort', 'type', 'created_at'];
 
     protected $hidden = ['updated_at'];
 
