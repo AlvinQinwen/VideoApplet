@@ -51,12 +51,14 @@ class AppletController extends Controller
         $data = $applet->find($id)->toArray();
         if ($data) {
 
-            $this->redis->set($data['app_id'], json_encode($data));
+            $result = $applet->where('id', $id)->update($params);
+            $newData = $applet->find($id)->toArray();
+            $this->redis->set($data['app_id'], json_encode($newData));
 
             return response()->json([
                 'code' => 201,
                 'message' => '更新数据成功',
-                'data' => $applet->where('id', $id)->update($params)
+                'data' => $result
             ], 201);
         }
 
