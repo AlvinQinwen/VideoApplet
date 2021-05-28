@@ -14,7 +14,9 @@ class CacheVideoData implements ShouldQueue
     private Client $redis;
     public function __construct()
     {
-        $config = ['host' => config('http.redis_host')];
+        $config = [
+            'database' => 3
+        ];
 
         $this->redis = new Client($config);
     }
