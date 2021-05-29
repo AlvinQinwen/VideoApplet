@@ -14,7 +14,6 @@ class CachePathData
     public function __construct()
     {
         $config = [
-            'host' => config('http.redis_host'),
             'database' => 1
         ];
         $this->redis = new Client($config);

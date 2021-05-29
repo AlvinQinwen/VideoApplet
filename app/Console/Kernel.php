@@ -25,7 +25,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-//        $schedule->command('cache:data')->everyThreeHours();
+        $schedule->command('cache:video')->everyThirtyMinutes();
+        $schedule->command('cache:path')->everyThirtyMinutes();
+        $schedule->command('cache:app')->everyThirtyMinutes();
     }
 
     /**
