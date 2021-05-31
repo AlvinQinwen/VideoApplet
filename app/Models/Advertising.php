@@ -85,6 +85,9 @@ class Advertising extends BaseModel
      */
     public function getInfo($ids)
     {
-        return self::whereIn('id', $ids)->select(['id', 'title', 'cover_url', 'jump_url', 'sort', 'type'])->get();
+        return self::whereIn('id', $ids)
+            ->select(['id', 'title', 'cover_url', 'jump_url', 'sort', 'type'])
+            ->orderBy('sort', 'desc')
+            ->get();
     }
 }
