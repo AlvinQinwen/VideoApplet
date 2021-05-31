@@ -57,7 +57,11 @@ class Advertising extends BaseModel
                 }
 
                  if ( !empty($validated['sort'])) {
-                     $query->where('sort','like','%'.$validated['sort'].'%');
+                     $query->where('sort', $validated['sort']);
+                 }
+
+                 if ( !empty($validated['type'])) {
+                     $query->where('type', $validated['type']);
                  }
 
              }
