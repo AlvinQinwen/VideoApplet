@@ -70,6 +70,10 @@ class Applet extends BaseModel
                  if ( !empty($validated['debug'])) {
                      $query->where('debug', $validated['debug']);
                  }
+
+                 if ( !empty($validated['mark'])) {
+                     $query->where('mark', 'like', '%'.$validated['mark'].'%');
+                 }
              }
 
          });
