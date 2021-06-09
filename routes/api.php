@@ -6,6 +6,8 @@ use App\Http\Controllers\AdvertisingController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\AppletController;
 use App\Http\Controllers\PathController;
+use App\Http\Controllers\AppGroupController;
+use App\Http\Controllers\AdGroupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +35,16 @@ Route::group(['prefix' => 'advertising'], function () {
 });
 
 /**
+ * 广告组模块
+ */
+Route::group(['prefix' => 'advertising/group'], function () {
+    Route::post('index/{page?}/{page_size?}', [AdGroupController::class, 'index'])->name('广告组列表');
+    Route::post('create', [AdGroupController::class, 'create'])->name('新增广告组');
+    Route::post('edit/{id}', [AdGroupController::class, 'edit'])->name('广告组修改');
+    Route::get('destroy/{id}', [AdGroupController::class, 'destroy'])->name('广告组删除');
+});
+
+/**
  * 视频模块
  */
 Route::group(['prefix' => 'video'], function () {
@@ -50,6 +62,16 @@ Route::group(['prefix' => 'app'], function () {
     Route::post('create', [AppletController::class, 'create'])->name('新增小程序');
     Route::post('edit/{id}', [AppletController::class, 'edit'])->name('小程序修改');
     Route::get('destroy/{id}', [AppletController::class, 'destroy'])->name('小程序删除');
+});
+
+/**
+ * 小程序组模块
+ */
+Route::group(['prefix' => 'app/group'], function () {
+    Route::post('index/{page?}/{page_size?}', [AppGroupController::class, 'index'])->name('小程序组列表');
+    Route::post('create', [AppGroupController::class, 'create'])->name('新增小程序组');
+    Route::post('edit/{id}', [AppGroupController::class, 'edit'])->name('小程序组修改');
+    Route::get('destroy/{id}', [AppGroupController::class, 'destroy'])->name('小程序组删除');
 });
 
 /**

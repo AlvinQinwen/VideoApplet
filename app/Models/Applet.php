@@ -30,6 +30,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Applet whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property-read mixed $advertising_info
+ * @property string $interstitia_unitId 插屏广告单元
+ * @property int $screen_open 是否开启插屏1开启，2关闭
+ * @property string $rewarded_unitId 激励广告单元
+ * @property int $excitation_open 是否开启激励1开启，2关闭
+ * @method static \Illuminate\Database\Eloquent\Builder|Applet whereExcitationOpen($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Applet whereInterstitiaUnitId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Applet whereRewardedUnitId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Applet whereScreenOpen($value)
  */
 class Applet extends BaseModel
 {

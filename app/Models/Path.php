@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Path whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Path whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read mixed $app_name
  */
 class Path extends BaseModel
 {

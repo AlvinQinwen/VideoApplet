@@ -26,6 +26,8 @@ use Illuminate\Support\Collection;
  * @method static \Illuminate\Database\Eloquent\Builder|Advertising whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Advertising whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $type 广告类型 1主页 2返回
+ * @method static \Illuminate\Database\Eloquent\Builder|Advertising whereType($value)
  */
 class Advertising extends BaseModel
 {

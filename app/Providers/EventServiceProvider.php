@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\AppGroupEvent;
 use App\Events\PathCacheEvent;
 use App\Events\RedisCacheDataEvent;
+use App\Listeners\AppGroupListener;
 use App\Listeners\CachePathData;
 use App\Listeners\CacheVideoData;
 use Illuminate\Auth\Events\Registered;
@@ -19,6 +21,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
@@ -26,7 +29,10 @@ class EventServiceProvider extends ServiceProvider
         RedisCacheDataEvent::class => [CacheVideoData::class],
 
         //缓存path
-        PathCacheEvent::class => [CachePathData::class]
+        PathCacheEvent::class => [CachePathData::class],
+
+        //更新修改删除新增 小程序组时 进行对应的操作
+        AppGroupEvent::class => [AppGroupListener::class]
     ];
 
     /**
