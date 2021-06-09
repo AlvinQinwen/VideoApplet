@@ -23,7 +23,9 @@ class AdGroupController extends Controller
 
     public function create(Request $request, AdGroup $AdGroup)
     {
-        $result = $AdGroup->create($request->input());
+        $params = $request->input();
+        $params['ad_ids'] = $params['ad_ids']??'';
+        $result = $AdGroup->create($params);
 
         return response()->json([
             'code' => 201,
