@@ -43,10 +43,17 @@ class AppGroupController extends Controller
         $params = $request->input();
         $id = $request->id;
 
+        $data = $AppGroup->find($id);
+
+        //说明要修改广告组了 进行重置操作
+        if (isset($params['ad_group_id']) && !empty($params['ad_group_id'])) {
+            event(new AppGroupEvent(1, $data->app_ids, $data->ad_group_id));
+        }
+
         return response()->json([
             'code' => 201,
             'message' => '更新数据成功',
-            'data' => $AppGroup->where('id', $id)->update($params)
+            'data' => $data->update($params)
         ], 201);
     }
 
@@ -54,7 +61,8 @@ class AppGroupController extends Controller
     {
         //首先拿到要删除的数据
         $data =  $AppGroup->find($request->id);
-        event(new AppGroupEvent(3, $data->app_ids, $data->ad_group_id));
+        //进行了删除操作
+        event(new AppGroupEvent(2, $data->app_ids, $data->ad_group_id));
 
         return response()->json([
             'code' => 204,
