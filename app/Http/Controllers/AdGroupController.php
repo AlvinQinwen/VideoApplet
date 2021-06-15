@@ -61,7 +61,9 @@ class AdGroupController extends Controller
         //首先拿到所有小程序组中在用该广告组的小程序
         $appGroups = AppGroup::select(['id', 'ad_group_id', 'app_ids'])->where('ad_group_id', $request->id)->get()->toArray();
         foreach ($appGroups as $k => $appGroup) {
-            event(new AppGroupEvent(2, $appGroup->app_ids, $appGroup->ad_group_id));
+            if ($appGroup->app_ids) {
+                event(new AppGroupEvent(2, $appGroup->app_ids, $appGroup->ad_group_id));
+            }
         }
 
         $data = $AdGroup->find($request->id);
