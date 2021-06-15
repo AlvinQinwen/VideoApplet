@@ -34,6 +34,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $screen_open 是否开启插屏1开启，2关闭
  * @property string $rewarded_unitId 激励广告单元
  * @property int $excitation_open 是否开启激励1开启，2关闭
+ * @property string $which_video_type 使用哪种视频 1腾讯云 2腾讯视频 默认1
  * @method static \Illuminate\Database\Eloquent\Builder|Applet whereExcitationOpen($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applet whereInterstitiaUnitId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applet whereRewardedUnitId($value)
@@ -42,7 +43,7 @@ use Illuminate\Database\Eloquent\Model;
 class Applet extends BaseModel
 {
     protected $fillable = ['id', 'name', 'app_id', 'secret', 'debug', 'advertising_ids', 'mark',
-        'interstitia_unitId', 'screen_open', 'rewarded_unitId', 'excitation_open', 'created_at'
+        'interstitia_unitId', 'screen_open', 'rewarded_unitId', 'excitation_open', 'which_video_type', 'created_at'
     ];
 
     protected $hidden = ['updated_at', 'advertising_ids'];
