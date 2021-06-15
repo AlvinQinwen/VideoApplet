@@ -34,7 +34,7 @@ class AdGroup extends BaseModel
     {
         if ($this->ad_ids != '') {
             $idArr = explode(',', $this->ad_ids);
-            return Advertising::whereIn('id', $idArr)->select('title')->get();
+            return Advertising::whereIn('id', $idArr)->select(['id as advertising_id','title'])->get();
         }
         return collect([]);
     }

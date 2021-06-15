@@ -42,7 +42,7 @@ class AppGroup extends BaseModel
     public function getAppletNamesAttribute()
     {
         if ($this->app_ids) {
-            return Applet::whereIn('id', explode(',', $this->app_ids))->select('name')->get();
+            return Applet::whereIn('id', explode(',', $this->app_ids))->select(['id as applet_id', 'name'])->get();
         }
         return collect([]);
     }
