@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $title 视频标题
  * @property string $cover_url 视频封面
  * @property string $video_url 视频播放地址
+ * @property string $tx_video_url 腾讯视频播放地址
  * @property string $share_cover 分享封面
  * @property int $sort 权重
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -30,7 +31,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Video extends BaseModel
 {
-    protected $fillable = ['id', 'title', 'cover_url', 'video_url', 'share_cover', 'sort', 'created_at'];
+    protected $fillable = ['id', 'title', 'cover_url', 'video_url', 'tx_video_url', 'share_cover', 'sort', 'created_at'];
 
     protected $hidden = ['updated_at'];
 
@@ -56,7 +57,6 @@ class Video extends BaseModel
                  if ( !empty($validated['id'])) {
                      $query->where('id', $validated['id']);
                  }
-
              }
 
          });
