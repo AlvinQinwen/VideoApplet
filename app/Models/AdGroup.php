@@ -26,7 +26,18 @@ class AdGroup extends BaseModel
 {
     protected $fillable = ['id', 'ad_group_name', 'ad_ids', 'created_at'];
 
+    protected $appends = ['ad_name'];
+
     protected $hidden = ['updated_at'];
+
+    public function getAdNameAttribute()
+    {
+        if ($this->ad_ids != '') {
+            $idArr = explode(',', $this->ad_ids);
+            return Advertising::whereIn('id', $idArr)->select('title')->get();
+        }
+        return collect([]);
+    }
 
     public function searchCon(array $validated, $page, $page_size)
     {

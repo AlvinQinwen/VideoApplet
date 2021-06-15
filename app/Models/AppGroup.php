@@ -29,6 +29,24 @@ class AppGroup extends BaseModel
 
     protected $hidden = ['updated_at'];
 
+    protected $appends = ['ad_group_name', 'applet_names'];
+
+    public function getAdGroupNameAttribute()
+    {
+        if ($this->ad_group_id) {
+            return AdGroup::where('id', $this->ad_group_id)->select('ad_group_name')->value('ad_group_name');
+        }
+        return '';
+    }
+
+    public function getAppletNamesAttribute()
+    {
+        if ($this->app_ids) {
+            return Applet::whereIn('id', explode(',', $this->app_ids))->select('name')->get();
+        }
+        return collect([]);
+    }
+
     public function searchCon(array $validated, $page, $page_size)
     {
          $page = $page > 0 ? $page : 1;
