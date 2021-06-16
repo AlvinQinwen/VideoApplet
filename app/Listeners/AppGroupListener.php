@@ -40,15 +40,14 @@ class AppGroupListener
                     //一个小程序组 只能绑定一个广告组
                     $adIds = explode(',', AdGroup::where('id', $event->ad_group_id)->select('ad_ids')->value('ad_ids'));
 
-                    //比对当前小程序的广告ids
-                    $selfIdsStr = Applet::where('id', $appId)->select('advertising_ids')->value('advertising_ids');
-                    $selfIdsArr = explode(',', $selfIdsStr);
+//                    //比对当前小程序的广告ids
+//                    $selfIdsArr = explode(',', Applet::where('id', $appId)->select('advertising_ids')->value('advertising_ids'));
 
                     //进行排重 重复的进行unset操作
-                    $newIdsArr = array_unique(array_merge($adIds, $selfIdsArr));
+//                    $newIdsArr = array_unique(array_merge($adIds, $selfIdsArr));
                     //然后更新该小程序的广告ids
                     Applet::where('id', $appId)->update([
-                        'advertising_ids' => implode(",", $newIdsArr)
+                        'advertising_ids' => implode(",", $adIds)
                     ]);
                 }
 

@@ -64,7 +64,7 @@ class AdGroupController extends Controller
         $appGroups = AppGroup::select(['id', 'ad_group_id', 'app_ids'])->where('ad_group_id', $request->id)->get()->toArray();
         foreach ($appGroups as $k => $appGroup) {
             if ($appGroup['app_ids']) {
-                event(new AppGroupEvent(1, $appGroup['app_ids'], $appGroup['ad_group_id']));
+                event(new AppGroupEvent(2, $appGroup['app_ids'], $appGroup['ad_group_id']));
             }
         }
 
