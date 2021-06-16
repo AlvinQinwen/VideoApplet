@@ -46,6 +46,7 @@ class AdGroupController extends Controller
         $appGroups = AppGroup::select(['id', 'ad_group_id', 'app_ids'])->where('ad_group_id', $request->id)->get()->toArray();
         foreach ($appGroups as $k => $appGroup) {
             //循环前先判断该组有没有绑定小程序 如果绑定了 才会去进行重置操作
+            dd($appGroup)
             \Log::info(json_encode($appGroup));
 //            if ($appGroup->app_ids) {
 //                event(new AppGroupEvent(1, $appGroup->app_ids, $appGroup->ad_group_id));
