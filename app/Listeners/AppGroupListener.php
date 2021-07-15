@@ -33,12 +33,15 @@ class AppGroupListener
         switch ($event->type) {
             //新增 / 修改操作，会进行重置
             case 1:
+                dd(11);
                 //首先分割appids 拿到需要操作的公众号
                 $appArr = explode(',', $event->app_id);
+                 \Log::info("小程序数组", $appArr);
                 foreach ($appArr as $appId) {
 
                     //一个小程序组 只能绑定一个广告组
                     $adIds = explode(',', AdGroup::where('id', $event->ad_group_id)->select('ad_ids')->value('ad_ids'));
+                    \Log::info("广告ids", $adIds);
 
 //                    //比对当前小程序的广告ids
 //                    $selfIdsArr = explode(',', Applet::where('id', $appId)->select('advertising_ids')->value('advertising_ids'));
@@ -50,8 +53,7 @@ class AppGroupListener
                         'advertising_ids' => implode(",", $adIds)
                     ]);
                 }
-
-            break;
+                break;
 
             case 2:
                 //删除操作 进行取消配对的操作
@@ -77,10 +79,7 @@ class AppGroupListener
                         'advertising_ids' => implode(",", $selfIdsArr)
                     ]);
                 }
-
-            break;
+                break;
         }
-
-
     }
 }
