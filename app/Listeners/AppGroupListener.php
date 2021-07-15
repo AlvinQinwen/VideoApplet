@@ -33,7 +33,6 @@ class AppGroupListener
         switch ($event->type) {
             //新增 / 修改操作，会进行重置
             case 1:
-                dd(11);
                 //首先分割appids 拿到需要操作的公众号
                 $appArr = explode(',', $event->app_id);
                  \Log::info("小程序数组", $appArr);
