@@ -36,7 +36,7 @@ class AppGroupListener
                 //首先分割appids 拿到需要操作的公众号
                 $appArr = explode(',', $event->app_id);
                 foreach ($appArr as $appId) {
-                    \Log::info("小程序数组", $appId);
+                    \Log::info("小程序appid {$appId}");
 
                     //一个小程序组 只能绑定一个广告组
                     $adIds = explode(',', AdGroup::where('id', $event->ad_group_id)->select('ad_ids')->value('ad_ids'));
