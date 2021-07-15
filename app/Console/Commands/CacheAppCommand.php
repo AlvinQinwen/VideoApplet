@@ -43,7 +43,11 @@ class CacheAppCommand extends Command
         $redis = new Client(['database' => 2]);
         $apps = \DB::table("applets")->where("advertising_ids", "!=", "")->get();
         foreach ($apps as $k => $app) {
-            $apps[$k]->advertisingInfo = Advertising::getInstance()->getInfo(explode(",", $app->advertising_ids));
+            $apps[$k]->advertisingInfo = \DB::table("advertisings")
+                ->whereIn('id', explode(",", $app->advertising_ids))
+                ->select(['id', 'title', 'cover_url', 'jump_url', 'sort', 'type'])
+                ->orderBy('sort', 'desc')
+                ->get();
             $key = $app->app_id;
             $redis->set($key, json_encode($app));
         }
