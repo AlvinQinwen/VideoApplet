@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Advertising;
 use App\Models\Applet;
 use Illuminate\Console\Command;
 use Predis\Client;
@@ -40,8 +41,9 @@ class CacheAppCommand extends Command
     public function handle()
     {
         $redis = new Client(['database' => 2]);
-        $apps = Applet::get();
-        foreach ($apps as $app) {
+        $apps = \DB::table("applets")->where("advertising_ids", "!=", "")->get();
+        foreach ($apps as $k => $app) {
+            $apps[$k]->advertisingInfo = Advertising::getInstance()->getInfo(explode(",", $app->advertising_ids));
             $key = $app->app_id;
             $redis->set($key, json_encode($app));
         }
